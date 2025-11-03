@@ -8,7 +8,8 @@ package com.example.backend.jwt;
 
 import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.interfaces.Claim;
-import com.example.backend.pojo.RestBean;
+import com.example.backend.common.BaseContext;
+import com.example.backend.entity.RestBean;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,9 +58,10 @@ public class JWTFilter implements Filter {
         }
 
         // 设置用户属性到请求中
-        request.setAttribute("id", userData.get("id").asInt());
+        request.setAttribute("id", userData.get("id").asLong());
         request.setAttribute("account", userData.get("account").asString());
         request.setAttribute("password", userData.get("password").asString());
+        BaseContext.setCurrentId(userData.get("id").asLong());
 
         chain.doFilter(req, res);
     }

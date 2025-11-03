@@ -9,7 +9,7 @@ package com.example.backend.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
-import com.example.backend.pojo.entity.User;
+import com.example.backend.entity.po.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

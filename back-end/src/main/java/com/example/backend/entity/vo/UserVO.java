@@ -1,4 +1,4 @@
-package com.example.backend.pojo.vo;
+package com.example.backend.entity.vo;
 
 /*
  * @Auther:fz
@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserVO {
-    private Integer id;
+    private Long id;
     private String username,account,password,avatar,email;
     private Date time;
 }

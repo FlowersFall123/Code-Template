@@ -1,6 +1,6 @@
 package com.example.backend.service.Impl;
 
-import com.example.backend.pojo.entity.User;
+import com.example.backend.entity.po.User;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.service.UserService;
 import jakarta.annotation.Resource;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public User getUserById(Long id) {
         return userMapper.getUserById(id);
     }
 

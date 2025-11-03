@@ -6,7 +6,7 @@ package com.example.backend.mapper;
  * @Description:
  */
 
-import com.example.backend.pojo.entity.User;
+import com.example.backend.entity.po.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,5 +22,5 @@ public interface UserMapper {
     List<User> getAllUser();
 
     @Select("SELECT * FROM user WHERE id=#{id}")
-    User getUserById(Integer id);
+    User getUserById(Long id);
 }

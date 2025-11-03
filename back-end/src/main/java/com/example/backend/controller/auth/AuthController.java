@@ -1,7 +1,7 @@
 package com.example.backend.controller.auth;
 
-import com.example.backend.pojo.RestBean;
-import com.example.backend.pojo.entity.User;
+import com.example.backend.entity.RestBean;
+import com.example.backend.entity.po.User;
 import com.example.backend.jwt.JWTUtil;
 import com.example.backend.service.UserService;
 import jakarta.annotation.Resource;

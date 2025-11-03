@@ -1,4 +1,4 @@
-package com.example.backend.pojo;
+package com.example.backend.entity;
 
 /*
  * @Auther:fz

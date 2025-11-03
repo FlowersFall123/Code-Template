@@ -6,12 +6,12 @@ package com.example.backend.service;
  * @Description:
  */
 
-import com.example.backend.pojo.entity.User;
+import com.example.backend.entity.po.User;
 
 import java.util.List;
 
 public interface UserService {
     User getUserByAccountAndPassword(String account, String password);
-    User getUserById(Integer id);
+    User getUserById(Long id);
     List<User> getAllUser();
 }

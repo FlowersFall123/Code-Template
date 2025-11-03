@@ -1,4 +1,12 @@
-package com.example.backend.pojo.dto;
+package com.example.backend.entity.po;
+
+/*
+ * @Auther:fz
+ * @Date:2025/5/30
+ * @Description:
+ */
+
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,17 +15,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-/*
- * @Auther:fz
- * @Date:2025/9/5
- * @Description:
- */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-    private Integer id;
+public class User {
+    private Long id;
     private String username,account,password,avatar,email;
     private Date time;
 }
