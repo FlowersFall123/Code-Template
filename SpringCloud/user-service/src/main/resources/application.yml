@@ -1,0 +1,56 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+        server-addr: 192.168.195.131:8848
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://${springCloud.db.host:192.168.195.131}:${springCloud.db.port:3306}/${springCloud.db.table}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${springCloud.db.root:root}
+    password: ${springCloud.db.password:123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#feign:
+#  okhttp:
+#    enabled: true # 启用 OKHttp
+#  data:
+#    redis:
+#      url: redis://localhost:6379
+
+
+#  ai:
+#    openai:
+#      api-key: ${API-KEY-xiaoai}
+#      base-url: https://xiaoai.plus
+#      chat:
+#        options:
+#          model: gpt-4o-mini
+#    chat:
+#      memory:
+#        repository:
+#          jdbc:
+#            platform: mariadb
+#            initialize-schema: always
+#
+#    vectorstore:
+#      redis:
+#        # 首次启动自动创建索引与 schema
+#        initialize-schema: true
+#        index-name: custom-index
+##        prefix: kb   #redis里面键的前缀
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.signBridge.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+
+
+

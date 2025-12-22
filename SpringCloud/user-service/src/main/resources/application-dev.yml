@@ -1,0 +1,7 @@
+springCloud:
+  db:
+    host: 192.168.195.131
+    port: 3306
+    root: root
+    password: 123
+    table: user-service

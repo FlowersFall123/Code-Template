@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: 192.168.195.131:8848
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user/**  # 匹配 /api/user/** 路径
+
+
+springcloud:
+  auth:
+    exclude-paths: # 不需要认证的路径
+      - /api/auth/**
