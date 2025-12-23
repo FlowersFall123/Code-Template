@@ -19,11 +19,10 @@ public interface UserMapper {
     /**
      * 登录
      * @param account
-     * @param password
      * @return
      */
-    @Select("SELECT * FROM user WHERE account=#{account} AND password=#{password}")
-    User getUserByAccountAndPassword(String account, String password);
+    @Select("SELECT * FROM user WHERE account=#{account} ")
+    User getUserByAccount(String account);
 
     /**
      * 注册用户

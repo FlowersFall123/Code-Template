@@ -16,6 +16,9 @@ spring:
       chat:
         options:
           model: ${proPath.ai.model}
+      embedding:
+        options:
+          model: text-embedding-3-small
     chat:
       memory:
         repository:
@@ -23,12 +26,31 @@ spring:
             platform: ${proPath.jdbc.platform}
             initialize-schema: always
 
-#    vectorstore:
-#      redis:
-#        # 首次启动自动创建索引与 schema
-#        initialize-schema: true
-#        index-name: custom-index
-#        prefix: kb   #redis里面键的前缀
+    vectorstore:
+      redis:
+        # 首次启动自动创建索引与 schema
+        initialize-schema: true
+        index-name: custom-index
+        prefix: AI-   #redis里面键的前缀
+
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: ${proPath.mail.qq}
+    password: ${proPath.mail.token}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true # QQ邮箱必须开启SSL
+
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

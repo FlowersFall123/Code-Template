@@ -49,7 +49,7 @@ public class AIController {
     @Autowired
     private JdbcChatMemoryRepository jdbcChatMemoryRepository;
 
-    @Resource
+    @Autowired
     private VectorStore vectorStore;
 
     @Resource

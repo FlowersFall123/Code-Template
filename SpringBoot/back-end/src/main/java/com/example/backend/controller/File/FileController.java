@@ -1,4 +1,4 @@
-package com.example.backend.controller.File;
+package com.example.backend.controller.file;
 
 import com.example.backend.tool.UploadFileTool;
 import org.springframework.web.bind.annotation.PostMapping;

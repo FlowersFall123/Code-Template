@@ -9,8 +9,12 @@ proPath:
     host: localhost
     port: 6379
   ai:
-    key: ${API-KEY-xiaoai}
-    url: https://xiaoai.plus
+    key: sk-yw1RYdnX8JseQuM0mDFEVptf4bEBI1Gc6KxPQeuyGLP9BmFk
+    url: https://api.chatanywhere.tech
     model: gpt-4o-mini
   jdbc:
     platform: mariadb
+  mail:
+    qq: 3165575650@qq.com
+    token: qkgdpeallahbdgac
+

@@ -6,24 +6,25 @@ package com.example.backend.service;
  * @Description:
  */
 
+import com.example.backend.entity.dto.RegisterForm;
 import com.example.backend.entity.po.User;
 
 import java.util.List;
 
 public interface UserService {
     /**
-     * 通过账号和密码获取用户
+     * 登录验证
      * @param account
      * @param password
      * @return
      */
-    User getUserByAccountAndPassword(String account, String password);
+    User loginCheck(String account, String password);
     /**
      * 注册用户
      * @param user
      * @return
      */
-    Integer register(User user);
+    Integer register(RegisterForm registerForm);
 
     /**
      * 通过ID获取用户
