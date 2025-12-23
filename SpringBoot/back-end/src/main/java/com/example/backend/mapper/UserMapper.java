@@ -7,6 +7,7 @@ package com.example.backend.mapper;
  */
 
 import com.example.backend.entity.po.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,12 +16,34 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
+    /**
+     * 登录
+     * @param account
+     * @param password
+     * @return
+     */
     @Select("SELECT * FROM user WHERE account=#{account} AND password=#{password}")
     User getUserByAccountAndPassword(String account, String password);
 
+    /**
+     * 注册用户
+     * @param user
+     * @return
+     */
+    Integer register(User user);
+
+    /**
+     * 获取所有用户
+     * @return
+     */
     @Select("SELECT * FROM user")
     List<User> getAllUser();
 
+    /**
+     * 获取用户
+     * @param id
+     * @return
+     */
     @Select("SELECT * FROM user WHERE id=#{id}")
     User getUserById(Long id);
 }

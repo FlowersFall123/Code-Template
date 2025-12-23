@@ -1,5 +1,6 @@
 package com.example.backend.service.Impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.example.backend.entity.po.User;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.service.UserService;
@@ -22,6 +23,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByAccountAndPassword(String account, String password) {
         return userMapper.getUserByAccountAndPassword(account,password);
+    }
+
+    @Override
+    public Integer register(User user) {
+        //生成账号
+        String account = IdUtil.getSnowflake(1, 1).nextIdStr();
+        return 0;
     }
 
     @Override

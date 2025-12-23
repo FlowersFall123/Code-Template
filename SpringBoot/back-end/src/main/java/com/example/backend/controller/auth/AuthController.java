@@ -31,4 +31,6 @@ public class AuthController {
             return RestBean.success("cg", JWTUtil.createToken(user));
         }
     }
+
+
 }
