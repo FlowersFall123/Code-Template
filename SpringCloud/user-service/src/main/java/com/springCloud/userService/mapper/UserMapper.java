@@ -22,4 +22,11 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE id=#{id}")
     User getUserById(Long id);
 
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    Integer UpdateUser(User user);
+
 }

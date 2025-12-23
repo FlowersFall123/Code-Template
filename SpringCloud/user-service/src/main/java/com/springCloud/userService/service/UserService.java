@@ -5,11 +5,6 @@ package com.springCloud.userService.service;
  * @Date:2025/5/30
  * @Description:
  */
-
-
-
-
-
 import com.springCloud.api.entity.User;
 
 import java.util.List;
@@ -17,5 +12,6 @@ import java.util.List;
 public interface UserService {
     User getUserByAccountAndPassword(String account, String password);
     User getUserById(Long id);
+    Integer UpdateUser(User user);
 
 }

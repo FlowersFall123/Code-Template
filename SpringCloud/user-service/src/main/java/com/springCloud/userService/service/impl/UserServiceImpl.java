@@ -36,5 +36,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserById(id);
     }
 
+    @Override
+    public Integer UpdateUser(User user) {
+        user.setId(BaseContext.getCurrentId());
+        return userMapper.UpdateUser(user);
+    }
+
 
 }

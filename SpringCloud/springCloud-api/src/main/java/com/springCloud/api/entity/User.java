@@ -30,20 +30,6 @@ public class User {
     private Long id;
 
     /**
-     * 用户金额
-     * 10000表示100元，精确到0.01元
-     */
-    @ApiModelProperty(value = "用户金额")
-    private Long money;
-
-    /**
-     * 用户积分
-     * 100积分等价为1元
-     */
-    @ApiModelProperty(value = "用户积分")
-    private Long integralAmount;
-
-    /**
      * 用户名
      */
     @ApiModelProperty(value = "用户名")
