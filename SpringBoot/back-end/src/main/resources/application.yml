@@ -1,6 +1,8 @@
 spring:
+  profiles:
+    active: dev
   datasource:
-    url: jdbc:mysql://${proPath.db.host:localhost}:${proPath.db.port:3306}/${proPath.db.database:proPath}
+    url: jdbc:mysql://${proPath.db.host:localhost}:${proPath.db.port:3306}/${proPath.db.database:propath}
     username: ${proPath.db.root:root}
     password: ${proPath.db.password:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,11 +23,11 @@ spring:
             platform: ${proPath.jdbc.platform}
             initialize-schema: always
 
-    vectorstore:
-      redis:
-        # 首次启动自动创建索引与 schema
-        initialize-schema: true
-        index-name: custom-index
+#    vectorstore:
+#      redis:
+#        # 首次启动自动创建索引与 schema
+#        initialize-schema: true
+#        index-name: custom-index
 #        prefix: kb   #redis里面键的前缀
 
 mybatis:

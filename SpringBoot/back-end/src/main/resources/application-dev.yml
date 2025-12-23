@@ -4,7 +4,7 @@ proPath:
     port: 3306
     root: root
     password: 19805601056Bkj@@
-    database: proPath
+    database: propath
   redis:
     host: localhost
     port: 6379
