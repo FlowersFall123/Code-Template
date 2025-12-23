@@ -1,26 +1,24 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/prepguide
-    username: root
-    password: 19805601056Bkj@@
+    url: jdbc:mysql://${proPath.db.host:localhost}:${proPath.db.port:3306}/${proPath.db.database:proPath}
+    username: ${proPath.db.root:root}
+    password: ${proPath.db.password:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
-      url: redis://localhost:6379
-
-
+      url: redis://${proPath.redis.host:localhost}:${proPath.redis.port:6379}
   ai:
     openai:
-      api-key: ${API-KEY-xiaoai}
-      base-url: https://xiaoai.plus
+      api-key: ${proPath.ai.key}
+      base-url: ${proPath.ai.url}
       chat:
         options:
-          model: gpt-4o-mini
+          model: ${proPath.ai.model}
     chat:
       memory:
         repository:
           jdbc:
-            platform: mariadb
+            platform: ${proPath.jdbc.platform}
             initialize-schema: always
 
     vectorstore:
@@ -29,7 +27,6 @@ spring:
         initialize-schema: true
         index-name: custom-index
 #        prefix: kb   #redis里面键的前缀
-
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

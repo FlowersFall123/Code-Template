@@ -1,6 +1,7 @@
 package com.example.backend.controller.auth;
 
 import com.example.backend.entity.RestBean;
+import com.example.backend.entity.dto.LoginForm;
 import com.example.backend.entity.po.User;
 import com.example.backend.jwt.JWTUtil;
 import com.example.backend.service.UserService;
@@ -21,9 +22,8 @@ public class AuthController {
     UserService userService;
 
     @PostMapping("/login")
-    public RestBean<String> login(@RequestParam("account") String account,
-                                  @RequestParam("password") String password) {
-        User user=userService.getUserByAccountAndPassword(account,password);
+    public RestBean<String> login(@RequestBody LoginForm loginForm) {
+        User user=userService.getUserByAccountAndPassword(loginForm.getAccount(), loginForm.getPassword());
         if(user==null) return RestBean.failure(502,"账号或密码错误");
         else
         {

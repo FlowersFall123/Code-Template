@@ -1,0 +1,16 @@
+proPath:
+  db:
+    host: localhost
+    port: 3306
+    root: root
+    password: 19805601056Bkj@@
+    database: proPath
+  redis:
+    host: localhost
+    port: 6379
+  ai:
+    key: ${API-KEY-xiaoai}
+    url: https://xiaoai.plus
+    model: gpt-4o-mini
+  jdbc:
+    platform: mariadb
