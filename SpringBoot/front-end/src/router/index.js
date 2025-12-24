@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path:"/auth",
       name:"验证界面",
-      component: () => import('@/components/Auth/Login.vue')
+      component: () => import('@/components/Auth/LoginForm.vue')
     },
     {
       path: '/AI',

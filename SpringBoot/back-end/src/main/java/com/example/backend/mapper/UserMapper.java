@@ -7,7 +7,6 @@ package com.example.backend.mapper;
  */
 
 import com.example.backend.entity.po.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,11 +17,11 @@ public interface UserMapper {
 
     /**
      * 登录
-     * @param account
+     * @param email
      * @return
      */
-    @Select("SELECT * FROM user WHERE account=#{account} ")
-    User getUserByAccount(String account);
+    @Select("SELECT * FROM user WHERE email=#{email} ")
+    User getUserByEmail(String email);
 
     /**
      * 注册用户

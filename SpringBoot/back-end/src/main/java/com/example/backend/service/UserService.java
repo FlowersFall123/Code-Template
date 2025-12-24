@@ -18,10 +18,10 @@ public interface UserService {
      * @param password
      * @return
      */
-    User loginCheck(String account, String password);
+    User loginCheck(String email, String password);
     /**
      * 注册用户
-     * @param user
+     * @param registerForm
      * @return
      */
     Integer register(RegisterForm registerForm);

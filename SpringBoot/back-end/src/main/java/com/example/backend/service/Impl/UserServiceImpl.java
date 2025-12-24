@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User loginCheck(String account, String password) {
-        User user = userMapper.getUserByAccount(account);
+    public User loginCheck(String email, String password) {
+        User user = userMapper.getUserByEmail(email);
         //密码校验
         boolean isOk = BCrypt.checkpw(password, user.getPassword());
         if(isOk)return user;

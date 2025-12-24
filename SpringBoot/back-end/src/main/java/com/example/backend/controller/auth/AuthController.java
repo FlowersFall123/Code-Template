@@ -3,6 +3,7 @@ package com.example.backend.controller.auth;
 import com.example.backend.entity.RestBean;
 import com.example.backend.entity.dto.LoginForm;
 import com.example.backend.entity.dto.RegisterForm;
+import com.example.backend.entity.dto.VerifyEmail;
 import com.example.backend.entity.po.User;
 import com.example.backend.jwt.JWTUtil;
 import com.example.backend.service.UserService;
@@ -11,7 +12,6 @@ import jakarta.annotation.Resource;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 
 /*
@@ -29,7 +29,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public RestBean<String> login(@RequestBody LoginForm loginForm) {
-        User user=userService.loginCheck(loginForm.getAccount(), loginForm.getPassword());
+        User user=userService.loginCheck(loginForm.getEmail(), loginForm.getPassword());
         if(user==null) return RestBean.failure(502,"账号或密码错误");
         else
         {
@@ -46,17 +46,15 @@ public class AuthController {
         else return RestBean.failure(502,"注册失败");
     }
 
-    @PostMapping("/sendCode")
-    public RestBean<String> sendCode(@RequestParam String email) {
+    @PostMapping("/sendCode/{email}")
+    public RestBean<String> sendCode(@PathVariable("email") String email) {
         verifyCodeTool.sendEmailWithCheck( email);
         return RestBean.success("发送成功");
     }
 
-    @GetMapping("/verifyCode")
-    public RestBean<String> verifyCode(@RequestParam String email, @RequestParam String code) {
-        if(verifyCodeTool.verifyCode(email, code)) return RestBean.success("验证成功");
+    @PostMapping("/verifyCode")
+    public RestBean<String> verifyCode(@RequestBody VerifyEmail verifyEmail) {
+        if(verifyCodeTool.verifyCode(verifyEmail.getEmail(), verifyEmail.getCode())) return RestBean.success("验证成功");
         else return RestBean.failure(502,"验证失败");
     }
-
-
 }

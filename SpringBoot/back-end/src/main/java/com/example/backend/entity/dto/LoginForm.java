@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "登录表单")
 public class LoginForm {
     /**
-     * 账号
+     * 邮箱
      */
-    @ApiModelProperty(value = "账号", required = true)
-    private String account;
+    @ApiModelProperty(value = "邮箱", required = true)
+    private String email;
 
     /**
      * 密码

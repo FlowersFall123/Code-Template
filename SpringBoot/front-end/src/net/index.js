@@ -11,7 +11,7 @@ const defaultFailure = (message) => ElMessage.warning(message) //后端请求返
 function post(url, data, success, failure = defaultFailure, error = defaultError) {//导入请求路径url,请求数据data,以及失败和成功的操作
   axios.post(url, data, { //使用axios的post请求 传入路径和数据
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded", //设置内容类型
+      "Content-Type": "application/json", //设置内容类型
       "Authorization": getAuthToken()
     },
     withCredentials: true

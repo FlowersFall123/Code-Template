@@ -32,18 +32,25 @@ public class VerifyCodeTool {
         // 1. 频率检查：判断 60 秒内是否发过
         String lockKey = LOCK_PREFIX + email;
         Boolean isLocked = redisTemplate.hasKey(lockKey);
-        if (Boolean.TRUE.equals(isLocked)) {
+        if (isLocked) {
             throw new RuntimeException("请求太频繁，请60秒后再试");
         }
 
-        // 2. 生成验证码
+        // 2. 旧验证码检查：判断 5 分钟内是否发过
+        String codeKey = CODE_PREFIX + email;
+        Boolean hasOldCode = redisTemplate.hasKey(codeKey);
+        if (hasOldCode) {
+            redisTemplate.delete(codeKey);
+        }
+
+        // 3. 生成验证码
         String code = RandomUtil.randomNumbers(6);
 
-        // 3. 原子操作：存入验证码 (5分钟有效) 并 设置发送锁 (60秒过期)
-        redisTemplate.opsForValue().set(CODE_PREFIX + email, code, 5, TimeUnit.MINUTES);
+        // 4. 原子操作：存入验证码 (5分钟有效) 并 设置发送锁 (60秒过期)
+        redisTemplate.opsForValue().set(codeKey, code, 5, TimeUnit.MINUTES);
         redisTemplate.opsForValue().set(lockKey, "1", 60, TimeUnit.SECONDS);
 
-        // 4. 异步调用邮件发送（最耗时的步骤交给线程池）
+        // 5. 异步调用邮件发送（最耗时的步骤交给线程池）
         this.doSendRealEmail(email, code);
     }
 

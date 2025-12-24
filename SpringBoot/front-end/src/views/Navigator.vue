@@ -1,12 +1,10 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import {useThemeStore} from "@/stores/ThemeStore.js";
 import {userUserStore} from "@/stores/userStore.js";
 
 const router = useRouter()
 const route = useRoute()
-const themeStore = useThemeStore();
 const userStore=userUserStore();
 
 // 基础导航数据：支持二级（仅需设置 icon 名称）
@@ -80,26 +78,6 @@ const baseNav = [
   },
 ]
 
-// 响应式导航数据：主题切换图标根据当前主题状态动态显示
-const rootNav = computed(() => {
-  const themeItems = [
-    {
-      label: '白天',
-      icon: 'son',
-      show: !themeStore.isDark,
-      action: 'toggleTheme'
-    },
-    {
-      label:'夜晚',
-      icon: 'moon',
-      show: themeStore.isDark,
-      action: 'toggleTheme'
-    }
-  ]
-
-  return [...baseNav, ...themeItems]
-})
-
 function goOut(){
   userStore.logout();
   router.push('/auth');
@@ -107,7 +85,7 @@ function goOut(){
 
 // 过滤显示的导航项 - 只显示 show 为 true 的项
 const filteredRootNav = computed(() => {
-  return rootNav.value.filter(item => {
+  return baseNav.filter(item => {
     // 检查主菜单项是否显示
     if (item.show !== true) {
       return false
@@ -254,8 +232,6 @@ function onItemClick(item) {
   if(item.icon==='output') goOut();
   else if (item.children && item.children.length) {
     currentParent.value = item
-  } else if (item.action === 'toggleTheme') {
-    themeStore.toggleTheme()
   } else if (item.route) {
     router.push(item.route)
   }
@@ -682,163 +658,4 @@ watch(
 }
 
 /* 不再使用 display:none 和居中对齐，避免跳变 */
-
-/* 暗色模式微调 */
-@media (prefers-color-scheme: dark) {
-  .sidebar {
-    --text: #e5e7eb;
-    --text-dim: #cbd5e1;
-
-    background: radial-gradient(120% 90% at 0% 0%, rgba(124, 58, 237, 0.12) 0%, rgba(124, 58, 237, 0.00) 55%),
-    radial-gradient(120% 90% at 100% 0%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.00) 50%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.55));
-    border-right: 1px solid rgba(99, 102, 241, 0.35);
-    box-shadow: 0 12px 32px rgba(2, 6, 23, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  }
-
-  .back-btn {
-    background: linear-gradient(180deg, rgba(30, 41, 59, 0.75), rgba(30, 41, 59, 0.55));
-    border-color: rgba(148, 163, 184, 0.28);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 18px rgba(2, 6, 23, 0.35);
-  }
-
-  .back-btn::before {
-    background: radial-gradient(80% 80% at 30% 20%, rgba(124, 58, 237, 0.28), rgba(99, 102, 241, 0.18));
-  }
-
-  .nav-item:hover,
-  .nav-item.is-active {
-    background: rgba(30, 41, 59, 0.55);
-    border-color: rgba(148, 163, 184, 0.25);
-    box-shadow: 0 10px 26px rgba(2, 6, 23, 0.35);
-    backdrop-filter: saturate(130%) blur(8px);
-  }
-
-  /* 暗色下图标圆底边框与光晕更收敛一些 */
-  .nav-icon::before {
-    border-color: rgba(148, 163, 184, 0.15);
-    background: radial-gradient(120% 120% at 0% 0%, rgba(124, 58, 237, 0.08), rgba(99, 102, 241, 0.04)),
-    linear-gradient(180deg, rgba(30, 41, 59, 0.45), rgba(30, 41, 59, 0.25));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 16px rgba(2, 6, 23, 0.38);
-  }
-
-  .nav-item.is-active .nav-icon::before {
-    border-color: rgba(167, 139, 250, 0.4);
-    background: radial-gradient(120% 120% at 0% 0%, rgba(167, 139, 250, 0.15), rgba(139, 92, 246, 0.08)),
-    linear-gradient(180deg, rgba(30, 41, 59, 0.55), rgba(30, 41, 59, 0.35));
-  }
-
-  .nav-icon::after {
-    filter: blur(10px);
-  }
-}
-
-/* 基于 .dark 类的暗色模式样式 */
-.dark .sidebar {
-  /* 暗色模式CSS变量 */
-  --text: #e5e7eb;
-  --text-dim: #cbd5e1;
-  --ring: rgba(99, 102, 241, 0.35);
-  --border: rgba(148, 163, 184, 0.25);
-
-  background: radial-gradient(120% 90% at 0% 0%, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.00) 55%),
-  radial-gradient(120% 90% at 100% 0%, rgba(99, 102, 241, 0.10) 0%, rgba(99, 102, 241, 0.00) 50%),
-  linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75));
-  border-right: 1px solid rgba(99, 102, 241, 0.35);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75),
-  inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.dark .back-btn {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-  border-color: rgba(148, 163, 184, 0.28);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 18px rgba(0, 0, 0, 0.5);
-}
-
-.dark .back-btn::before {
-  background: radial-gradient(80% 80% at 30% 20%, rgba(124, 58, 237, 0.28), rgba(99, 102, 241, 0.18));
-}
-
-.dark .nav-item:hover,
-.dark .nav-item.is-active {
-  background: rgba(0, 0, 0, 0.6);
-  border-color: rgba(148, 163, 184, 0.25);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-  backdrop-filter: saturate(130%) blur(8px);
-}
-
-.dark .nav-icon::before {
-  border-color: rgba(148, 163, 184, 0.15);
-  background: radial-gradient(120% 120% at 0% 0%, rgba(124, 58, 237, 0.08), rgba(99, 102, 241, 0.04)),
-  linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.dark .nav-item:hover .nav-icon::before {
-  border-color: rgba(148, 163, 184, 0.25);
-  background: radial-gradient(120% 120% at 0% 0%, rgba(124, 58, 237, 0.12), rgba(99, 102, 241, 0.06)),
-  linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.dark .nav-item.is-active .nav-icon::before {
-  border-color: rgba(167, 139, 250, 0.4);
-  background: radial-gradient(120% 120% at 0% 0%, rgba(167, 139, 250, 0.15), rgba(139, 92, 246, 0.08)),
-  linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
-}
-
-.dark .nav-icon::after {
-  filter: blur(10px);
-}
-
-/* 暗色模式下所有图标的默认颜色 - 更柔和的颜色 */
-.dark .nav-icon {
-  color: #94a3b8; /* 更柔和的灰色 */
-}
-
-/* 暗色模式下悬停时的图标颜色 */
-.dark .nav-item:hover .nav-icon {
-  color: #e2e8f0; /* 更亮的灰色 */
-}
-
-/* 暗色模式下激活状态的图标颜色 */
-.dark .nav-item.is-active .nav-icon {
-  color: #a78bfa; /* 柔和的紫色 */
-}
-
-/* 主题切换图标的响应式颜色 */
-/* 亮色模式下显示太阳图标（温暖黄色） */
-.nav-item[data-icon="son"] .nav-icon {
-  color: #fbbf24;
-}
-
-.nav-item[data-icon="son"]:hover .nav-icon {
-  color: #f59e0b;
-}
-
-/* 暗色模式下显示月亮图标（柔和紫色） */
-.nav-item[data-icon="moon"] .nav-icon {
-  color: #a78bfa;
-}
-
-.nav-item[data-icon="moon"]:hover .nav-icon {
-  color: #8b5cf6;
-}
-
-/* 暗色模式下的特殊光晕效果 */
-.dark .nav-item[data-icon="son"] .nav-icon::after {
-  background: conic-gradient(from 220deg, rgba(251, 191, 36, 0.4), rgba(245, 158, 11, 0.25), transparent 240deg);
-}
-
-.dark .nav-item[data-icon="moon"] .nav-icon::after {
-  background: conic-gradient(from 220deg, rgba(167, 139, 250, 0.4), rgba(139, 92, 246, 0.25), transparent 240deg);
-}
-
-/* 暗色模式下激活状态的特殊光晕效果 */
-.dark .nav-item.is-active .nav-icon::after {
-  background: conic-gradient(from 220deg, rgba(167, 139, 250, 0.4), rgba(139, 92, 246, 0.25), transparent 240deg);
-}
-
-/* 仅使用名称映射的图标，保持固定尺寸与对齐 */
 </style>
