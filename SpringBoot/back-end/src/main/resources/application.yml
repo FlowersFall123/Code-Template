@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  config:
+    import: classpath:application.properties
   datasource:
     url: jdbc:mysql://${proPath.db.host:localhost}:${proPath.db.port:3306}/${proPath.db.database:propath}
     username: ${proPath.db.root:root}

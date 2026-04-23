@@ -1,20 +1,20 @@
 proPath:
   db:
-    host: localhost
-    port: 3306
-    root: root
-    password: 19805601056Bkj@@
-    database: propath
+    host: ${DB_HOST}
+    port: ${DB_PORT}
+    root: ${DB_ROOT}
+    password: ${DB_PASSWORD}
+    database: ${DB_DATABASE}
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
   ai:
-    key: sk-yw1RYdnX8JseQuM0mDFEVptf4bEBI1Gc6KxPQeuyGLP9BmFk
-    url: https://api.chatanywhere.tech
-    model: gpt-4o-mini
+    key: ${OPENAI_KEY}
+    url: ${OPENAI_URL}
+    model: ${OPENAI_MODEL}
   jdbc:
-    platform: mariadb
+    platform: ${JDBC_PLATFORM}
   mail:
-    qq: 3165575650@qq.com
-    token: qkgdpeallahbdgac
+    qq: ${MAIL_QQ}
+    token: ${MAIL_TOKEN}
 
